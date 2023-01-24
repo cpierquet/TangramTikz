@@ -1,0 +1,246 @@
+% Author.........: C. Pierquet
+% licence........: Released under the LaTeX Project Public License v1.3c or later, see http://www.latex-project.org/lppl.txtf
+% Inspiration....: https://tex.stackexchange.com/questions/407449/typesetting-tangram-figures-in-latex
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{TangramTikz}[2023/01/22 v0.1.0 Tangram Puzzles with TikZ]
+% 0.1.0		Version initiale
+
+%------Packages utiles
+\RequirePackage{tikz}
+\RequirePackage{xparse}
+\RequirePackage{simplekv}
+\RequirePackage{xstring}
+\RequirePackage{listofitems}
+%librairies tikz
+\usetikzlibrary{calc,shapes.geometric}
+
+%pieces and styles, [en] and [fr], and keys
+%https://tex.stackexchange.com/questions/407449/typesetting-tangram-figures-in-latex
+\tikzset{
+	TangBigTri/.pic={\path[pic actions] (0,0)--(2,0)--(2,2)--cycle;},
+	TangGrandTri/.pic={\path[pic actions] (0,0)--(2,0)--(2,2)--cycle;},
+	TangMedTri/.pic={\path[pic actions] (0,0)--(1,1)--(2,0)--cycle;},
+	TangMoyTri/.pic={\path[pic actions] (0,0)--(1,1)--(2,0)--cycle;},
+	TangSqua/.pic={\path[pic actions] (0,0)--(1,0)--(1,1)--(0,1)--cycle;},
+	TangCar/.pic={\path[pic actions] (0,0)--(1,0)--(1,1)--(0,1)--cycle;},
+	TangSmalTri/.pic={\path[pic actions] (0,0)--(1,0)--(1,1)--cycle;},
+	TangPetTri/.pic={\path[pic actions] (0,0)--(1,0)--(1,1)--cycle;},
+	TangPara/.pic={\path[pic actions] (0,0)--(1,0)--(2,1)--(1,1)--cycle;}
+}
+\tikzset{%
+	TangPuzz/.style={transform shape,fill=#1,draw=#1},
+	TangPuzz/.default=black,
+	TangSol/.style={transform shape,fill=#1,draw=white,line width=1pt},
+	TangSol/.default=black
+}
+\defKV[TGRMTikz]{%keys [en] and [fr]
+	ListeCouleurs=\xdef\TangCouleurs{#1},
+	ColorList=\xdef\TangColors{#1}
+}
+\setKVdefault[TGRMTikz]{%keys by default [en] and [fr]
+	Puzzle=true,%
+	Correction=false,%
+	ColorCorrection=false,%
+	CorrectionCouleur=false,%
+	ListeCouleurs={red,orange,blue,green,purple},%
+	ColorList={red,orange,blue,green,purple}
+}
+
+%the square / le carre
+\NewDocumentCommand\TangramSquare{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\pic[TangSol={\TanGListeCouleurs[1]}] at (0,0) {TangBigTri};%
+		\pic[TangSol={\TanGListeCouleurs[1]},rotate=-90] at (2,2) {TangBigTri};%
+		\pic[TangSol={\TanGListeCouleurs[4]},rotate=-90] at (2,0) {TangSqua};%
+		\pic[TangSol={\TanGListeCouleurs[3]},rotate=180] at (4,0) {TangSmalTri};%
+		\pic[TangSol={\TanGListeCouleurs[3]},rotate=90] at (2,-1) {TangSmalTri};%
+		\pic[TangSol={\TanGListeCouleurs[5]},xscale=-1] at (2,-1) {TangPara};%
+		\pic[TangSol={\TanGListeCouleurs[2]},rotate=180] at (3,-1) {TangMedTri};%
+	}%
+	{%
+		\pic[#2] at (0,0) {TangBigTri};%
+		\pic[#2,rotate=-90] at (2,2) {TangBigTri};%
+		\pic[#2,rotate=-90] at (2,0) {TangSqua};%
+		\pic[#2,rotate=180] at (4,0) {TangSmalTri};%
+		\pic[#2,rotate=90] at (2,-1) {TangSmalTri};%
+		\pic[#2,xscale=-1] at (2,-1) {TangPara};%
+		\pic[#2,rotate=180] at (3,-1) {TangMedTri};%
+	}%
+}
+
+%the pinguin / le pingouin
+%https://tex.stackexchange.com/questions/407449/typesetting-tangram-figures-in-latex
+\NewDocumentCommand\TangramPinguin{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\path (0,-1) pic[TangSol={\TanGListeCouleurs[3]}] {TangSmalTri}
+		++(1,0) pic[TangSol={\TanGListeCouleurs[4]}] {TangSqua}
+		++(1,1) pic[TangSol={\TanGListeCouleurs[1]},rotate=-45,yscale=-1] {TangBigTri}
+		++(-45:2) pic[TangSol={\TanGListeCouleurs[1]},rotate=-135] {TangBigTri}
+		+({-sqrt(2)},0) pic[TangSol={\TanGListeCouleurs[5]},rotate=-135] {TangPara}
+		++(-2,{-2*sqrt(2)}) pic[TangSol={\TanGListeCouleurs[2]}] {TangMedTri}
+		++(2,1) pic[TangSol={\TanGListeCouleurs[3]},rotate=-90] {TangSmalTri} ;
+	}%
+	{%
+		\path (0,-1) pic[#2] {TangSmalTri}
+		++(1,0) pic[#2] {TangSqua}
+		++(1,1) pic[#2,rotate=-45,yscale=-1] {TangBigTri}
+		++(-45:2) pic[#2,rotate=-135] {TangBigTri}
+		+({-sqrt(2)},0) pic[#2,rotate=-135] {TangPara}
+		++(-2,{-2*sqrt(2)}) pic[#2] {TangMedTri}
+		++(2,1) pic[#2,rotate=-90] {TangSmalTri} ;
+	}%
+}
+
+%the boat / le bateau
+%https://tex.stackexchange.com/questions/407449/typesetting-tangram-figures-in-latex
+\NewDocumentCommand\TangramBoat{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\path (0,0) pic[TangSol={\TanGListeCouleurs[2]},rotate=180] {TangMedTri}
+		++(-1,-1) pic[TangSol={\TanGListeCouleurs[5]}] {TangPara}
+		++(1,0) pic[TangSol={\TanGListeCouleurs[3]}] {TangSmalTri}
+		++(1,0) pic[TangSol={\TanGListeCouleurs[4]}] {TangSqua}
+		++(2,1) pic[TangSol={\TanGListeCouleurs[3]},rotate=180] {TangSmalTri}
+		++(-2.5,0) pic[TangSol={\TanGListeCouleurs[1]},rotate=80] {TangBigTri}
+		++(80:4)
+		++(170:2) pic[TangSol={\TanGListeCouleurs[1]},rotate=-100] {TangBigTri} ;
+	}%
+	{%
+		\path (0,0) pic[#2,rotate=180] {TangMedTri}
+		++(-1,-1) pic[#2] {TangPara}
+		++(1,0) pic[#2] {TangSmalTri}
+		++(1,0) pic[#2] {TangSqua}
+		++(2,1) pic[#2,rotate=180] {TangSmalTri}
+		++(-2.5,0) pic[#2,rotate=80] {TangBigTri}
+		++(80:4)
+		++(170:2) pic[#2,rotate=-100] {TangBigTri} ;
+	}%
+}
+
+%the house / la maison
+\NewDocumentCommand\TangramHome{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=135>({sqrt(8)},0){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=45>(0,0){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}](-0.5,{sqrt(2)}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=135>({0.5+sqrt(8)},{sqrt(2)}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}](0.5,{sqrt(2)+1}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=-45>({sqrt(2)},{sqrt(2)}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<xscale=-1,rotate=45>({sqrt(8)},0){TangPetTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=135>({sqrt(8)},0){TangGrandTri}
+		\PieceTangram[#2]<rotate=45>(0,0){TangMoyTri}
+		\PieceTangram[#2](-0.5,{sqrt(2)}){TangPara}
+		\PieceTangram[#2]<rotate=135>({0.5+sqrt(8)},{sqrt(2)}){TangGrandTri}
+		\PieceTangram[#2](0.5,{sqrt(2)+1}){TangCar}
+		\PieceTangram[#2]<rotate=-45>({sqrt(2)},{sqrt(2)}){TangPetTri}
+		\PieceTangram[#2]<xscale=-1,rotate=45>({sqrt(8)},0){TangPetTri}
+	}%
+}
+
+%the fir tree / le sapin
+\NewDocumentCommand\TangramFirTree{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]<rotate=0>({0},{0}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=0>({-1.5},{1}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=-90>({0.5},{3}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]<xscale=-1,rotate=0>({2.5},{2}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=0>({-1.5},{2}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<xscale=-1,rotate=90>({-0.5},{2}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=0>({-0.5},{3}){TangMoyTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=0>({0},{0}){TangCar}
+		\PieceTangram[#2]<rotate=0>({-1.5},{1}){TangGrandTri}
+		\PieceTangram[#2]<rotate=-90>({0.5},{3}){TangGrandTri}
+		\PieceTangram[#2]<xscale=-1,rotate=0>({2.5},{2}){TangPara}
+		\PieceTangram[#2]<rotate=0>({-1.5},{2}){TangPetTri}
+		\PieceTangram[#2]<xscale=-1,rotate=90>({-0.5},{2}){TangPetTri}
+		\PieceTangram[#2]<rotate=0>({-0.5},{3}){TangMoyTri}
+	}%
+}
+
+%the cat / le chat
+\NewDocumentCommand\TangramCat{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]<rotate=45>({2-sqrt(2)},{2+sqrt(2)}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=0>(0,0){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=45>({2-sqrt(2)},{2-sqrt(2)}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]({2},{0}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=45>({2-1.5*sqrt(2)},{2+1.5*sqrt(2)}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<xscale=1,rotate=-135>({2-0.5*sqrt(2)},{2+2.5*sqrt(2)}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=90>({2-sqrt(2)},{sqrt(2)}){TangMoyTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=45>({2-sqrt(2)},{2+sqrt(2)}){TangCar}
+		\PieceTangram[#2]<rotate=0>(0,0){TangGrandTri}
+		\PieceTangram[#2]<rotate=45>({2-sqrt(2)},{2-sqrt(2)}){TangGrandTri}
+		\PieceTangram[#2]({2},{0}){TangPara}
+		\PieceTangram[#2]<rotate=45>({2-1.5*sqrt(2)},{2+1.5*sqrt(2)}){TangPetTri}
+		\PieceTangram[#2]<xscale=1,rotate=-135>({2-0.5*sqrt(2)},{2+2.5*sqrt(2)}){TangPetTri}
+		\PieceTangram[#2]<rotate=90>({2-sqrt(2)},{sqrt(2)}){TangMoyTri}
+	}%
+}
+
+%macros for tangram creation
+\NewDocumentCommand\TangramTikzCreateEN{ m }{%
+	\readlist*\TanGListeCouleurs{\TangColors}%
+	\ifboolKV[TGRMTikz]{Puzzle}{#1[TangPuzz]}{}%
+	\ifboolKV[TGRMTikz]{Correction}{#1[TangSol]}{}%
+	\ifboolKV[TGRMTikz]{ColorCorrection}{#1*}{}%
+}
+\NewDocumentCommand\TangramTikzCreateFR{ m }{%
+	\readlist*\TanGListeCouleurs{\TangCouleurs}%
+	\ifboolKV[TGRMTikz]{Puzzle}{#1[TangPuzz]}{}%
+	\ifboolKV[TGRMTikz]{Correction}{#1[TangSol]}{}%
+	\ifboolKV[TGRMTikz]{CorrectionCouleur}{#1*}{}%
+}
+
+%the independent command / la commande autonome
+\NewDocumentCommand\TangramTikz{ O{} D<>{} m }{%
+	\useKVdefault[TGRMTikz]%
+	\setKV[TGRMTikz]{#1}%
+	\begin{tikzpicture}[line join=bevel,#2]%
+		%SQUARE
+		\IfStrEq{#3}{Square}{\TangramTikzCreateEN{\TangramSquare}}{}%
+		\IfStrEq{#3}{Carre}{\TangramTikzCreateFR{\TangramSquare}}{}%
+		%PINGUIN
+		\IfStrEq{#3}{Pinguin}{\TangramTikzCreateEN{\TangramPinguin}}{}%
+		\IfStrEq{#3}{Pingouin}{\TangramTikzCreateFR{\TangramPinguin}}{}%
+		%BOAT
+		\IfStrEq{#3}{Boat}{\TangramTikzCreateEN{\TangramBoat}}{}%
+		\IfStrEq{#3}{Bateau}{\TangramTikzCreateFR{\TangramBoat}}{}%
+		%HOME
+		\IfStrEq{#3}{Home}{\TangramTikzCreateEN{\TangramHome}}{}%
+		\IfStrEq{#3}{Maison}{\TangramTikzCreateFR{\TangramHome}}{}%
+		%FIRTREE
+		\IfStrEq{#3}{FirTree}{\TangramTikzCreateEN{\TangramFirTree}}{}%
+		\IfStrEq{#3}{Sapin}{\TangramTikzCreateFR{\TangramFirTree}}{}%
+		%CAT
+		\IfStrEq{#3}{Cat}{\TangramTikzCreateEN{\TangramCat}}{}%
+		\IfStrEq{#3}{Chat}{\TangramTikzCreateFR{\TangramCat}}{}%
+	\end{tikzpicture}%
+}
+
+%manual creation / creation manuelle
+\NewDocumentCommand\PieceTangram{ O{TangPuzz} D<>{} D(){0,0} m }{%booléen+options pic+place pic+nom piece
+	\pic[#1,#2] at (#3) {#4};%
+}
+\NewDocumentEnvironment{EnvTangramTikz}{ O{} D<>{} }%
+{%
+	\useKVdefault[TGRMTikz]%
+	\setKV[TGRMTikz]{#1}%
+	\begin{tikzpicture}[line join=bevel,#2]%
+}%
+{%
+	\end{tikzpicture}%
+}
+
+\endinput
