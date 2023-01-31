@@ -50,8 +50,8 @@
 \setlength{\parindent}{0pt}
 \definecolor{LightGray}{gray}{0.9}
 
-\def\TPversion{0.1.1}
-\def\TPdate{26/01/2023}
+\def\TPversion{0.1.2}
+\def\TPdate{31/01/2023}
 
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{minted}
@@ -418,8 +418,12 @@ The second argument, \textit{optional} ans between \texttt{<...>}, give options 
 	\item etc
 \end{itemize}
 
-The third argument, \textit{mandatory} and between \texttt{\{...\}} is the name of the predefined tangram :
-%
+The third argument, \textit{mandatory} and between \texttt{\{...\}} is the name of the predefined tangram (list below).
+
+\pagebreak
+
+\subsection{List of predefined tangrams}
+
 \texttt{\begin{multicols}{5}
 	\begin{itemize}
 		\item Square
@@ -444,10 +448,12 @@ The third argument, \textit{mandatory} and between \texttt{\{...\}} is the name 
 		\item Jogger
 		\item Dancer
 		\item Camel
+		\item Flamingo
+		\item Heart
+		\item Giraffe
+		\item Horse
 	\end{itemize}
 \end{multicols}}
-
-\pagebreak
 
 \begin{PresentationCode}{}
 \TangramTikz{Rocket}~~
@@ -596,9 +602,35 @@ The third argument, \textit{mandatory} and between \texttt{\{...\}} is the name 
 \TangramTikz[ColorCorrection]{Camel}
 \end{PresentationCode}
 
+\begin{PresentationCode}{}
+\TangramTikz{Flamingo}
+\TangramTikz[Correction]{Flamingo}
+\TangramTikz[ColorCorrection]{Flamingo}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Heart}
+\TangramTikz[Correction]{Heart}
+\TangramTikz[ColorCorrection]{Heart}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Giraffe}
+\TangramTikz[Correction]{Giraffe}
+\TangramTikz[ColorCorrection]{Giraffe}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Horse}
+\TangramTikz[Correction]{Horse}
+\TangramTikz[ColorCorrection]{Horse}
+\end{PresentationCode}
+
 \newpage
 
 \part{History}
+
+\verb|v0.1.2|~:~~~~New models
 
 \verb|v0.1.1|~:~~~~New models
 

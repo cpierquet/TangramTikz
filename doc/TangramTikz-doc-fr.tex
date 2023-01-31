@@ -49,8 +49,8 @@
 \setlength{\parindent}{0pt}
 \definecolor{LightGray}{gray}{0.9}
 
-\def\TPversion{0.1.1}
-\def\TPdate{26 Janvier 2023}
+\def\TPversion{0.1.2}
+\def\TPdate{31 Janvier 2023}
 
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{minted}
@@ -420,7 +420,11 @@ Le deuxième argument, \textit{optionnel} et entre \texttt{<...>}, correspond au
 	\item etc
 \end{itemize}
 
-Le troisième argument, \textit{obligatoire} et entre \texttt{\{...\}} est quant à lui le nom du Tangram issu de la \textit{base de données} présente dans le package :
+Le troisième argument, \textit{obligatoire} et entre \texttt{\{...\}} est quant à lui le nom du Tangram issu de la \textit{base de données} présente dans le package (liste ci-après).
+
+\pagebreak
+
+\subsection{Liste des Tangrams inclus dans le package}
 %
 \texttt{\begin{multicols}{5}
 	\begin{itemize}
@@ -446,10 +450,14 @@ Le troisième argument, \textit{obligatoire} et entre \texttt{\{...\}} est quant
 		\item Coureur
 		\item Danseur
 		\item Chameau
+		\item Flamant
+		\item Coeur
+		\item Girafe
+		\item Cheval
 	\end{itemize}
 \end{multicols}}
 
-\pagebreak
+\medskip
 
 \begin{PresentationCode}{}
 \TangramTikz{Fusee}~~
@@ -598,9 +606,35 @@ Le troisième argument, \textit{obligatoire} et entre \texttt{\{...\}} est quant
 \TangramTikz[CorrectionCouleur]{Chameau}
 \end{PresentationCode}
 
+\begin{PresentationCode}{}
+\TangramTikz{Flamant}
+\TangramTikz[Correction]{Flamant}
+\TangramTikz[CorrectionCouleur]{Flamant}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Coeur}
+\TangramTikz[Correction]{Coeur}
+\TangramTikz[CorrectionCouleur]{Coeur}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Girafe}
+\TangramTikz[Correction]{Girafe}
+\TangramTikz[CorrectionCouleur]{Girafe}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Cheval}
+\TangramTikz[Correction]{Cheval}
+\TangramTikz[CorrectionCouleur]{Cheval}
+\end{PresentationCode}
+
 \newpage
 
 \part{Historique}
+
+\verb|v0.1.2|~:~~~~Nouveaux modèles
 
 \verb|v0.1.1|~:~~~~Nouveaux modèles
 
