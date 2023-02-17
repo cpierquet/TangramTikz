@@ -3,7 +3,8 @@
 % Inspiration....: https://tex.stackexchange.com/questions/407449/typesetting-tangram-figures-in-latex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{TangramTikz}[2023/01/31 v0.1.2 Tangram Puzzles with TikZ]
+\ProvidesPackage{TangramTikz}[2023/02/17 v0.1.3 Tangram Puzzles with TikZ]
+% 0.1.3		Ajout de modèles
 % 0.1.2		Ajout de modèles
 % 0.1.1		Ajout de modèles
 % 0.1.0		Version initiale + quelques modèles
@@ -639,6 +640,52 @@
 	}%
 }
 
+%the goat / la chèvre (0.1.3)
+\NewDocumentCommand\TangramGoat{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=135>({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=90>({1},{-1}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=180>({-2*sqrt(2)+1},{0}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]<rotate=135>({-sqrt(2)},{sqrt(2)}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=45>({-2.5*sqrt(2)},{0.5*sqrt(2)}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]({-2.5*sqrt(2)},{1.5*sqrt(2)}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=10>({1},{1}){TangPetTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=135>({0},{0}){TangGrandTri}
+		\PieceTangram[#2]<rotate=90>({1},{-1}){TangGrandTri}
+		\PieceTangram[#2]<rotate=180>({-2*sqrt(2)+1},{0}){TangPetTri}
+		\PieceTangram[#2]<rotate=135>({-sqrt(2)},{sqrt(2)}){TangCar}
+		\PieceTangram[#2]<rotate=45>({-2.5*sqrt(2)},{0.5*sqrt(2)}){TangMoyTri}
+		\PieceTangram[#2]({-2.5*sqrt(2)},{1.5*sqrt(2)}){TangPara}
+		\PieceTangram[#2]<rotate=10>({1},{1}){TangPetTri}
+	}%
+}
+
+%the lion / le lion (0.1.3)
+\NewDocumentCommand\TangramLion{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=135>({0},{0}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=90>({sqrt(2)},{-sqrt(2)}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]<rotate=-55>({sqrt(2)},{2-sqrt(2)}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=135>({sqrt(2)},{-sqrt(2)}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=180>({-sqrt(2)+0.5},{0}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=90>({-sqrt(2)},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]<rotate=-135>({-sqrt(2)-1.75},{1.75}){TangCar}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=135>({0},{0}){TangMoyTri}
+		\PieceTangram[#2]<rotate=90>({sqrt(2)},{-sqrt(2)}){TangGrandTri}
+		\PieceTangram[#2]<rotate=-55>({sqrt(2)},{2-sqrt(2)}){TangPara}
+		\PieceTangram[#2]<rotate=135>({sqrt(2)},{-sqrt(2)}){TangPetTri}
+		\PieceTangram[#2]<rotate=180>({-sqrt(2)+0.5},{0}){TangPetTri}
+		\PieceTangram[#2]<rotate=90>({-sqrt(2)},{0}){TangGrandTri}
+		\PieceTangram[#2]<rotate=-135>({-sqrt(2)-1.75},{1.75}){TangCar}
+	}%
+}
+
 %macros for tangram creation / commandes pour créer le tangram
 \NewDocumentCommand\TangramTikzCreateEN{ m }{%
 	\readlist*\TanGListeCouleurs{\TangColors}%
@@ -755,6 +802,12 @@
 		%HORSE
 		\IfStrEq{#3}{Horse}{\TangramTikzCreateEN{\TangramHorse}}{}%
 		\IfStrEq{#3}{Cheval}{\TangramTikzCreateFR{\TangramHorse}}{}%
+		%GOAT
+		\IfStrEq{#3}{Goat}{\TangramTikzCreateEN{\TangramGoat}}{}%
+		\IfStrEq{#3}{Chevre}{\TangramTikzCreateFR{\TangramGoat}}{}%
+		%LION
+		\IfStrEq{#3}{Lions}{\TangramTikzCreateEN{\TangramLion}}{}%
+		\IfStrEq{#3}{Lion}{\TangramTikzCreateFR{\TangramLion}}{}%
 	\end{tikzpicture}%
 }
 

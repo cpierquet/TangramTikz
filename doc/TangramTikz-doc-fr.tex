@@ -49,8 +49,8 @@
 \setlength{\parindent}{0pt}
 \definecolor{LightGray}{gray}{0.9}
 
-\def\TPversion{0.1.2}
-\def\TPdate{31 Janvier 2023}
+\def\TPversion{0.1.3}
+\def\TPdate{17 Février 2023}
 
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{minted}
@@ -454,6 +454,8 @@ Le troisième argument, \textit{obligatoire} et entre \texttt{\{...\}} est quant
 		\item Coeur
 		\item Girafe
 		\item Cheval
+		\item Chevre
+		\item Lion
 	\end{itemize}
 \end{multicols}}
 
@@ -630,9 +632,23 @@ Le troisième argument, \textit{obligatoire} et entre \texttt{\{...\}} est quant
 \TangramTikz[CorrectionCouleur]{Cheval}
 \end{PresentationCode}
 
+\begin{PresentationCode}{}
+\TangramTikz{Chevre}
+\TangramTikz[Correction]{Chevre}
+\TangramTikz[CorrectionCouleur]{Chevre}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Lion}
+\TangramTikz[Correction]{Lion}
+\TangramTikz[CorrectionCouleur]{Lion}
+\end{PresentationCode}
+
 \newpage
 
 \part{Historique}
+
+\verb|v0.1.3|~:~~~~Nouveaux modèles
 
 \verb|v0.1.2|~:~~~~Nouveaux modèles
 
