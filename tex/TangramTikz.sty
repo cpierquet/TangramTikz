@@ -686,6 +686,52 @@
 	}%
 }
 
+%the factory / l'usine (0.1.4)
+\NewDocumentCommand\TangramFactory{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=135>({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=-135>({0},{2*sqrt(2)}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=45>({-sqrt(2)},{sqrt(2)}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]({-1},{2*sqrt(2)}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=135>({0.5*sqrt(2)-0.5},{2*sqrt(2)+1}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]<xscale=-1,rotate=90>({-2*sqrt(2)},{0}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=-180>({-2*sqrt(2)+1},{2}){TangPetTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=135>({0},{0}){TangGrandTri}
+		\PieceTangram[#2]<rotate=-135>({0},{2*sqrt(2)}){TangGrandTri}
+		\PieceTangram[#2]<rotate=45>({-sqrt(2)},{sqrt(2)}){TangMoyTri}
+		\PieceTangram[#2]({-1},{2*sqrt(2)}){TangCar}
+		\PieceTangram[#2]<rotate=135>({0.5*sqrt(2)-0.5},{2*sqrt(2)+1}){TangPetTri}
+		\PieceTangram[#2]<xscale=-1,rotate=90>({-2*sqrt(2)},{0}){TangPara}
+		\PieceTangram[#2]<rotate=-180>({-2*sqrt(2)+1},{2}){TangPetTri}
+	}%
+}
+
+%the angel / l'ange (0.1.4)
+\NewDocumentCommand\TangramAngel{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=135>({0},{0}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]<rotate=90>({0},{0}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=90>({0},{1}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=-90>({0},{2.5}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]<rotate=-45>({0},{3}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=67.5>({0},{3}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<xscale=-1,rotate=5>({0},{3}){TangGrandTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=135>({0},{0}){TangPetTri}
+		\PieceTangram[#2]<rotate=90>({0},{0}){TangPara}
+		\PieceTangram[#2]<rotate=90>({0},{1}){TangMoyTri}
+		\PieceTangram[#2]<rotate=-90>({0},{2.5}){TangPetTri}
+		\PieceTangram[#2]<rotate=-45>({0},{3}){TangCar}
+		\PieceTangram[#2]<rotate=67.5>({0},{3}){TangGrandTri}
+		\PieceTangram[#2]<xscale=-1,rotate=5>({0},{3}){TangGrandTri}
+	}%
+}
+
 %macros for tangram creation / commandes pour créer le tangram
 \NewDocumentCommand\TangramTikzCreateEN{ m }{%
 	\readlist*\TanGListeCouleurs{\TangColors}%
@@ -808,6 +854,12 @@
 		%LION
 		\IfStrEq{#3}{Lions}{\TangramTikzCreateEN{\TangramLion}}{}%
 		\IfStrEq{#3}{Lion}{\TangramTikzCreateFR{\TangramLion}}{}%
+		%FACTORY
+		\IfStrEq{#3}{Factory}{\TangramTikzCreateEN{\TangramFactory}}{}%
+		\IfStrEq{#3}{Usine}{\TangramTikzCreateFR{\TangramFactory}}{}%
+		%ANGEL
+		\IfStrEq{#3}{Angel}{\TangramTikzCreateEN{\TangramAngel}}{}%
+		\IfStrEq{#3}{Ange}{\TangramTikzCreateFR{\TangramAngel}}{}%
 	\end{tikzpicture}%
 }
 

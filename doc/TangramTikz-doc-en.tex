@@ -50,8 +50,8 @@
 \setlength{\parindent}{0pt}
 \definecolor{LightGray}{gray}{0.9}
 
-\def\TPversion{0.1.3}
-\def\TPdate{17/02/2023}
+\def\TPversion{0.1.4}
+\def\TPdate{18/02/2023}
 
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{minted}
@@ -454,6 +454,8 @@ The third argument, \textit{mandatory} and between \texttt{\{...\}} is the name 
 		\item Horse
 		\item Goat
 		\item Lions
+		\item Factory
+		\item Angel
 	\end{itemize}
 \end{multicols}}
 
@@ -640,9 +642,23 @@ The third argument, \textit{mandatory} and between \texttt{\{...\}} is the name 
 \TangramTikz[ColorCorrection]{Lions}
 \end{PresentationCode}
 
+\begin{PresentationCode}{}
+\TangramTikz{Factory}
+\TangramTikz[Correction]{Factory}
+\TangramTikz[ColorCorrection]{Factory}
+\end{PresentationCode}
+
+\begin{PresentationCode}{}
+\TangramTikz{Angel}
+\TangramTikz[Correction]{Angel}
+\TangramTikz[ColorCorrection]{Angel}
+\end{PresentationCode}
+
 \newpage
 
 \part{History}
+
+\verb|v0.1.4|~:~~~~New models
 
 \verb|v0.1.3|~:~~~~New models
 
