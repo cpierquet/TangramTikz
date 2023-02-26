@@ -3,7 +3,8 @@
 % Inspiration....: https://tex.stackexchange.com/questions/407449/typesetting-tangram-figures-in-latex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{TangramTikz}[2023/02/18 v0.1.4 Tangram Puzzles with TikZ]
+\ProvidesPackage{TangramTikz}[2023/02/25 v0.1.5 Tangram Puzzles with TikZ]
+% 0.1.5		Ajout de modèles
 % 0.1.4		Ajout de modèles
 % 0.1.3		Ajout de modèles
 % 0.1.2		Ajout de modèles
@@ -779,6 +780,98 @@
 	}%
 }
 
+%the chicken / la poule (0.1.5)
+\NewDocumentCommand\TangramChicken{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=90>({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<xscale=-1,rotate=90>({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]({0.25},{0.25}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=135>({0.5*sqrt(2)},{-0.5*sqrt(2)}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]({1},{2}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=135>({1+sqrt(2)},{3}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]<xscale=-1>({-1},{2}){TangPara}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=90>({0},{0}){TangGrandTri}
+		\PieceTangram[#2]<xscale=-1,rotate=90>({0},{0}){TangGrandTri}
+		\PieceTangram[#2]({0.25},{0.25}){TangPetTri}
+		\PieceTangram[#2]<rotate=135>({0.5*sqrt(2)},{-0.5*sqrt(2)}){TangMoyTri}
+		\PieceTangram[#2]({1},{2}){TangCar}
+		\PieceTangram[#2]<rotate=135>({1+sqrt(2)},{3}){TangPetTri}
+		\PieceTangram[#2]<xscale=-1>({-1},{2}){TangPara}
+	}%
+}
+
+%the turtle / la tortue (0.1.5)
+\NewDocumentCommand\TangramTurtle{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<xscale=-1,rotate=90>({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]<xscale=-1,,rotate=90>({2},{0}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]({3},{1}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=90>({0},{0}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=45>({-0.5*sqrt(2)},{-0.5*sqrt(2)}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=-135>({2+0.5*sqrt(2)},{0.5*sqrt(2)}){TangPetTri}
+	}%
+	{%
+		\PieceTangram[#2]({0},{0}){TangGrandTri}
+		\PieceTangram[#2]<xscale=-1,rotate=90>({0},{0}){TangGrandTri}
+		\PieceTangram[#2]<xscale=-1,,rotate=90>({2},{0}){TangPara}
+		\PieceTangram[#2]({3},{1}){TangCar}
+		\PieceTangram[#2]<rotate=90>({0},{0}){TangMoyTri}
+		\PieceTangram[#2]<rotate=45>({-0.5*sqrt(2)},{-0.5*sqrt(2)}){TangPetTri}
+		\PieceTangram[#2]<rotate=-135>({2+0.5*sqrt(2)},{0.5*sqrt(2)}){TangPetTri}
+	}%
+}
+
+%the crab / le crabe (0.1.5)
+\NewDocumentCommand\TangramCrab{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=-90>({0},{2}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=90>({3},{-1}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=180>({1},{0}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]({1},{1}){TangCar}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]({2},{1}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=-90>({3},{3}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]<rotate=90>({0},{1}){TangMoyTri}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=-90>({0},{2}){TangGrandTri}
+		\PieceTangram[#2]<rotate=90>({3},{-1}){TangGrandTri}
+		\PieceTangram[#2]<rotate=180>({1},{0}){TangPetTri}
+		\PieceTangram[#2]({1},{1}){TangCar}
+		\PieceTangram[#2]({2},{1}){TangPara}
+		\PieceTangram[#2]<rotate=-90>({3},{3}){TangPetTri}
+		\PieceTangram[#2]<rotate=90>({0},{1}){TangMoyTri}
+	}%
+}
+
+%the snail / l'ecargot (0.1.5)
+\NewDocumentCommand\TangramSnail{ s O{TangPuzz} }{%*=colorcorrection,[key for pic]
+	\IfBooleanTF{#1}%
+	{%
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=45>({0},{0}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[1]}]<rotate=-135>({0},{2*sqrt(2)}){TangGrandTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[5]}]({0},{0}){TangPara}
+		\PieceTangram[TangSol={\TanGListeCouleurs[2]}]({1},{0}){TangMoyTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]<rotate=-90>({-1},{1}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[3]}]({-2},{0}){TangPetTri}
+		\PieceTangram[TangSol={\TanGListeCouleurs[4]}]<rotate=-45>({2},{1}){TangCar}
+	}%
+	{%
+		\PieceTangram[#2]<rotate=45>({0},{0}){TangGrandTri}
+		\PieceTangram[#2]<rotate=-135>({0},{2*sqrt(2)}){TangGrandTri}
+		\PieceTangram[#2]({0},{0}){TangPara}
+		\PieceTangram[#2]({1},{0}){TangMoyTri}
+		\PieceTangram[#2]<rotate=-90>({-1},{1}){TangPetTri}
+		\PieceTangram[#2]({-2},{0}){TangPetTri}
+		\PieceTangram[#2]<rotate=-45>({2},{1}){TangCar}
+	}%
+}
+
 %macros for tangram creation / commandes pour créer le tangram
 \NewDocumentCommand\TangramTikzCreateEN{ m }{%
 	\readlist*\TanGListeCouleurs{\TangColors}%
@@ -913,6 +1006,18 @@
 		%UFO
 		\IfStrEq{#3}{Ufo}{\TangramTikzCreateEN{\TangramUfo}}{}%
 		\IfStrEq{#3}{Ovni}{\TangramTikzCreateFR{\TangramUfo}}{}%
+		%CHICKEN
+		\IfStrEq{#3}{Chicken}{\TangramTikzCreateEN{\TangramChicken}}{}%
+		\IfStrEq{#3}{Poule}{\TangramTikzCreateFR{\TangramChicken}}{}%
+		%TURTLE
+		\IfStrEq{#3}{Turtle}{\TangramTikzCreateEN{\TangramTurtle}}{}%
+		\IfStrEq{#3}{Tortue}{\TangramTikzCreateFR{\TangramTurtle}}{}%
+		%CRAB
+		\IfStrEq{#3}{Crab}{\TangramTikzCreateEN{\TangramCrab}}{}%
+		\IfStrEq{#3}{Crabe}{\TangramTikzCreateFR{\TangramCrab}}{}%
+		%SNAIL
+		\IfStrEq{#3}{Snail}{\TangramTikzCreateEN{\TangramSnail}}{}%
+		\IfStrEq{#3}{Escargot}{\TangramTikzCreateFR{\TangramSnail}}{}%
 	\end{tikzpicture}%
 }
 
